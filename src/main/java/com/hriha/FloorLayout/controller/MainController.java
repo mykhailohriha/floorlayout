@@ -1,5 +1,6 @@
 package com.hriha.FloorLayout.controller;
 
+import com.hriha.FloorLayout.domain.Coordinate;
 import com.hriha.FloorLayout.domain.Layout;
 import com.hriha.FloorLayout.repos.LayoutRepo;
 import com.hriha.FloorLayout.service.LayoutService;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -41,8 +44,10 @@ public class MainController {
     @GetMapping("/show")
     public String showLayout(@RequestParam Integer id, Model model) {
         Layout layout = layoutService.findLayoutById(id);
+        List<Coordinate> coordinates = layoutService.getXY(layout);
 
         model.addAttribute("layout", layout );
+        model.addAttribute("coordinates", coordinates);
 
         return "layout";
     }

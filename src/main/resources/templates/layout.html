@@ -8,7 +8,31 @@
 
 <p th:text="'Hello, ' + ${layout.name} + '!'"></p>
 
+<ul th:each="coordinate : ${coordinates}">
+    <li th:text="${coordinate.x}"></li>
+    <li th:text="${coordinate.y}"></li>
+</ul>
 
+<canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000;">
+</canvas>
+
+
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.moveTo(100, 50);
+
+    function draw(x, y) {
+        ctx.lineTo(x * 50, y * 50);
+        ctx.strokeStyle = "blue";
+        ctx.stroke();
+    }
+</script>
+<ul th:each="coordinate : ${coordinates}">
+            <script th:inline="javascript">
+                draw([[${coordinate.x}]],[[${coordinate.y}]]);
+            </script>
+</ul>
 
 </body>
 </html>
