@@ -20,12 +20,13 @@ public class MainController {
     public String main(Model model) {
         Iterable<Layout> layouts = layoutService.findAll();
         model.addAttribute("layouts", layouts);
+        model.addAttribute("js", "javascriptxernya");
         return "main";
     }
 
     @PostMapping("/add")
-    public String addBook(@RequestParam String name,
-                          @RequestParam String coordinates) {
+    public String addLayout(@RequestParam String name,
+                            @RequestParam String coordinates) {
 
         layoutService.saveLayout(name, coordinates);
 
@@ -33,8 +34,16 @@ public class MainController {
     }
 
     @GetMapping("/add")
-    public String addBook(){
+    public String addLayout() {
         return "add";
     }
 
+    @GetMapping("/show")
+    public String showLayout(@RequestParam Integer id, Model model) {
+        Layout layout = layoutService.findLayoutById(id);
+
+        model.addAttribute("layout", layout );
+
+        return "layout";
+    }
 }

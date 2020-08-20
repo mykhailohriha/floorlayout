@@ -21,4 +21,8 @@ public class LayoutService {
         Layout layout = new Layout(name, coordinates);
         layoutRepo.save(layout);
     }
+
+    public Layout findLayoutById(Integer id) {
+        return layoutRepo.findLayoutById(id);
+    }
 }
