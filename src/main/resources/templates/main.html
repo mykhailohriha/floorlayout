@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<a href="/add">Добавить макет</a>
+
+<div>Список макетов</div>
+
+<table>
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Coordinates</th>
+    </tr>
+    <tbody>
+    <tr th:each="l : ${layouts}">
+        <td th:text="${l.id}"></td>
+        <td th:text="${l.name}"></td>
+        <td th:text="${l.coordinates}"></td>
+    </tr>
+    </tbody>
+    </thead>
+</table>
+
+<canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000;">
+
+</canvas>
+</body>
+</html>
