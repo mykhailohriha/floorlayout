@@ -76,7 +76,26 @@ public class MainController {
     @Transactional
     @GetMapping("/delete")
     public String deleteLayout(@RequestParam Integer id) {
-        layoutService.deleteBook(id);
+        layoutService.deleteLayout(id);
+        return "redirect:/all";
+    }
+
+    @GetMapping("/update")
+    public String updateLayout(@RequestParam Integer id, Model model) {
+        Layout layout = layoutService.findLayoutById(id);
+        model.addAttribute("layout", layout);
+
+        return "update";
+    }
+
+    @Transactional
+    @PostMapping("/update")
+    public String updateBook(@RequestParam Integer id,
+                             @RequestParam String name,
+                             @RequestParam String coordinates){
+        layoutService.deleteLayout(id);
+        layoutService.saveLayout(name, coordinates);
+
         return "redirect:/all";
     }
 }
