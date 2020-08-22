@@ -16,6 +16,7 @@
         <th scope="col">Name</th>
         <th scope="col">Coordinates</th>
         <th scope="col">View</th>
+        <th scope="col">Action</th>
     </tr>
     <tbody>
     <tr th:each="l : ${layouts}">
@@ -27,28 +28,15 @@
                 <span>Show</span>
             </a>
         </td>
+        <td>
+            <a th:href="@{'/delete?id=' + ${l.id}}">
+                <span>Delete</span>
+            </a>
+        </td>
     </tr>
     </tbody>
     </thead>
 </table>
 
-<canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000;">
-</canvas>
-
-<script th:inline="javascript">
-    var x = [[${js}]];
-
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext ("2d");
-    ctx.moveTo (50, 50);
-    ctx.lineTo (50, 100);
-    ctx.lineTo (100, 100);
-    ctx.lineTo (100, 50);
-    ctx.lineTo (50, 50);
-    ctx.strokeStyle = "blue";
-    ctx.stroke();
-    ctx.font = "10px Arial";
-    ctx.fillText(x,20,50);
-</script>
 </body>
 </html>

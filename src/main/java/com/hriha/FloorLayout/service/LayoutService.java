@@ -28,9 +28,12 @@ public class LayoutService {
         return layoutRepo.findLayoutById(id);
     }
 
-    public List<Coordinate> getXY(Layout layout) {
+    public void deleteBook(Integer id) {
+        layoutRepo.deleteById(id);
+    }
+
+    public List<Coordinate> getXY(String coordinates) {
         List<Coordinate> list = new ArrayList<>();
-        String coordinates = layout.getCoordinates();
 
         String[] arrayList = coordinates.split(" ");
 
