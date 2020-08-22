@@ -28,7 +28,7 @@ public class LayoutService {
         return layoutRepo.findLayoutById(id);
     }
 
-    public void deleteBook(Integer id) {
+    public void deleteLayout(Integer id) {
         layoutRepo.deleteById(id);
     }
 
