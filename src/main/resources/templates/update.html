@@ -9,15 +9,26 @@
 <body>
 
 <div th:insert="parts/navigation :: nav"></div>
+<div class="container mt-5">
 
-<div>
-    <form method="post" action="/update">
-        <input type="text" name="id" th:value="${layout.id}" hidden>
-        <input type="text" name="name" th:value="${layout.name}" placeholder="Layout name"/>
-        <input type="text" name="coordinates" th:value="${layout.coordinates}" placeholder="New coordinates"/>
-        <button type="submit">Update book</button>
-    </form>
+    <div>
+        <form method="post" action="/update"  >
+            <div class="form-group">
+                <input type="text" name="id" class="form-control" th:value="${layout.id}">
+            </div>
+            <div class="form-group">
+                <label for="inputName">New name:</label>
+                <input type="text" name="name" class="form-control"
+                       th:value="${layout.name}" required placeholder="New name" id="inputName">
+            </div>
+            <div class="form-group">
+                <label for="inputCoordinates">Coordinates:</label>
+                <input type="text" name="coordinates" th:value="${layout.coordinates}" class="form-control" id="inputCoordinates"
+                       aria-describedby="coordinatesHelp" placeholder="Coordinates" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update layout</button>
+        </form>
+    </div>
 </div>
-
 </body>
 </html>
