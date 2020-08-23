@@ -9,36 +9,33 @@
 <body>
 
 <div th:insert="parts/navigation :: nav"></div>
-
-<p th:text="'Hello, ' + ${layout.name} + '!'"></p>
-
-<ul th:each="coordinate : ${coordinates}">
-    <li th:text="${coordinate.x}"></li>
-    <li th:text="${coordinate.y}"></li>
-</ul>
-
-<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
-</canvas>
+<div class="container mt-4">
+    <p th:text="'Hello, ' + ${layout.name} + '!'"></p>
 
 
-<script>
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
+        <canvas id="myCanvas" width="500%" height="500" style="border:1px solid #000000;">
+        </canvas>
 
-    function draw(x, y) {
-        ctx.lineTo(x * 50, y * 50);
-        ctx.strokeStyle = "blue";
-        ctx.stroke();
-    }
-</script>
-<ul th:each="coordinate : ${coordinates}">
-            <script th:inline="javascript">
-                draw([[${coordinate.x}]],[[${coordinate.y}]]);
-            </script>
-</ul>
 
-<script>
-    draw([[${x}]],[[${y}]]);
-</script>
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+
+        function draw(x, y) {
+            ctx.lineTo(x * 50, y * 50);
+            ctx.strokeStyle = "blue";
+            ctx.stroke();
+        }
+    </script>
+    <ul th:each="coordinate : ${coordinates}">
+        <script th:inline="javascript">
+            draw([[${coordinate.x}]], [[${coordinate.y}]]);
+        </script>
+    </ul>
+
+    <script>
+        draw([[${x}]], [[${y}]]);
+    </script>
+</div>
 </body>
 </html>

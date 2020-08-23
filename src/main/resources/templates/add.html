@@ -8,17 +8,24 @@
 </head>
 <body>
 
-<div th:insert="parts/navigation :: nav"></div>
+<div th:insert="parts/navigation :: nav" ></div>
 
-<div>
-    <form method="post" action="/add">
-        <p>Введите название макета:</p>
-        <input type="text" name="name" required placeholder="Название макета"/>
-        <p>Введите координаты макета через кому(пример: 1 1, 1 2, 2 2, 2 1):</p>
-        <input type="text" name="coordinates" required placeholder="Координаты макета"/>
-        <button type="submit">Добавить макет</button>
-    </form>
+<div class="container mt-5">
+    <div>
+        <form method="post" action="/add"  >
+            <div class="form-group">
+                <label for="inputName">Layout name</label>
+                <input type="text" name="name" class="form-control" id="inputName" placeholder="Layout name" required>
+            </div>
+            <div class="form-group">
+                <label for="inputCoordinates">Coordinates:</label>
+                <input type="text" name="coordinates" class="form-control" id="inputCoordinates"
+                       aria-describedby="coordinatesHelp" placeholder="Coordinates" required>
+                <small id="coordinatesHelp" class="form-text text-muted">Example: "1 1,1 2,2 2,2 1"</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Add layout</button>
+        </form>
+    </div>
 </div>
-
 </body>
 </html>

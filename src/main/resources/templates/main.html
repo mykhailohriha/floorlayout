@@ -8,42 +8,41 @@
 </head>
 <body>
 
-
 <div th:insert="parts/navigation :: nav"></div>
-<div class="container">
-<div>Список макетов</div>
+<div class="container mt-5">
+    <div align="center" ><h1 >Layouts:</h1></div>
 
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Coordinates</th>
-        <th scope="col">View</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="l : ${layouts}">
-        <td th:text="${l.id}"></td>
-        <td th:text="${l.name}"></td>
-        <td th:text="${l.coordinates}"></td>
-        <td>
-            <a th:href="@{'/show?id=' + ${l.id}}">
-                <span>Show</span>
-            </a>
-        </td>
-        <td>
-            <a th:href="@{'/delete?id=' + ${l.id}}">
-                <span>Delete</span>
-            </a>
-            <a th:href="@{'/update?id=' + ${l.id}}">
-                <span>Update</span>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table class="table" >
+        <thead class="thead-dark">
+        <tr align="center">
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Coordinates</th>
+            <th scope="col">View</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="l : ${layouts}">
+            <td th:text="${l.id}"></td>
+            <td th:text="${l.name}"></td>
+            <td th:text="${l.coordinates}"></td>
+            <td align="center">
+                <a role="button" class="btn btn-success" th:href="@{'/show?id=' + ${l.id}}">
+                    <span>Show</span>
+                </a>
+            </td>
+            <td align="center">
+                <a role="button" class="btn btn-danger" th:href="@{'/delete?id=' + ${l.id}}">
+                    <span>Delete</span>
+                </a>
+                <a role="button" class="btn btn-warning" th:href="@{'/update?id=' + ${l.id}}">
+                    <span>Update</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
