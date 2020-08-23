@@ -8,12 +8,13 @@
 </head>
 <body>
 
-<div th:insert="parts/navigation :: nav"></div>
 
+<div th:insert="parts/navigation :: nav"></div>
+<div class="container">
 <div>Список макетов</div>
 
-<table>
-    <thead>
+<table class="table">
+    <thead class="thead-dark">
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
@@ -21,6 +22,7 @@
         <th scope="col">View</th>
         <th scope="col">Action</th>
     </tr>
+    </thead>
     <tbody>
     <tr th:each="l : ${layouts}">
         <td th:text="${l.id}"></td>
@@ -41,8 +43,7 @@
         </td>
     </tr>
     </tbody>
-    </thead>
 </table>
-
+</div>
 </body>
 </html>
