@@ -10,32 +10,49 @@
 
 <div th:insert="parts/navigation :: nav"></div>
 <div class="container mt-4">
-    <p th:text="'Hello, ' + ${layout.name} + '!'"></p>
+    <div align="center">
+        <p th:text="'Hello, ' + ${layout.name} + '!'"></p>
 
-
-        <canvas id="myCanvas" width="500%" height="500" style="border:1px solid #000000;">
+        <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;">
         </canvas>
 
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
 
-    <script>
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-
-        function draw(x, y) {
-            ctx.lineTo(x * 50, y * 50);
-            ctx.strokeStyle = "blue";
-            ctx.stroke();
-        }
-    </script>
-    <ul th:each="coordinate : ${coordinates}">
-        <script th:inline="javascript">
-            draw([[${coordinate.x}]], [[${coordinate.y}]]);
+            function draw(x, y) {
+                ctx.lineTo(x * 50, y * 50);
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = "red";
+                ctx.stroke();
+            }
         </script>
-    </ul>
+        <ul th:each="coordinate : ${coordinates}">
+            <script th:inline="javascript">
+                draw([[${coordinate.x}]], [[${coordinate.y}]]);
+            </script>
+        </ul>
 
-    <script>
-        draw([[${x}]], [[${y}]]);
-    </script>
+        <script>
+            draw([[${x}]], [[${y}]]);
+
+            for (var x = 0.5; x < 600; x += 10) {
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, 600);
+            }
+
+            for (var y = 0.5; y < 600; y += 10) {
+                ctx.moveTo(0, y);
+                ctx.lineTo(600, y);
+            }
+
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "#888";
+            ctx.stroke();
+        </script>
+    </div>
 </div>
 </body>
 </html>
