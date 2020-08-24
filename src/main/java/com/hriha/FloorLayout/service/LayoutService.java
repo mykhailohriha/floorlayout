@@ -47,4 +47,14 @@ public class LayoutService {
         }
         return list;
     }
+
+    public Iterable<Layout> filter(String filter) {
+        Iterable<Layout> layouts;
+        if (filter != null && !filter.isEmpty()) {
+            layouts = layoutRepo.findByName(filter);
+        } else {
+            layouts = layoutRepo.findAll();
+        }
+        return layouts;
+    }
 }
