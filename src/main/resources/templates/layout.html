@@ -11,7 +11,7 @@
 <div th:insert="parts/navigation :: nav"></div>
 <div class="container mt-4">
     <div align="center">
-        <p th:text="'Hello, ' + ${layout.name} + '!'"></p>
+        <h1><p th:text="${layout.name} + ':'"></p></h1>
 
         <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;">
         </canvas>
