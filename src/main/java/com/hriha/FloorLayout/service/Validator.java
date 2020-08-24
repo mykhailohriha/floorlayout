@@ -46,7 +46,25 @@ public class Validator {
     }
 
     public boolean isCoordinateGoingClockwise(String data) {
-        return false;
+        String[] list = data.split(",");
+        ArrayList<String> x = new ArrayList<>();
+        ArrayList<String> y = new ArrayList<>();
+
+        for (int i = 0; i <list.length; i++) {
+            String[] pair = list[i].split(" ");
+            x.add(pair[0]);
+            y.add(pair[1]);
+        }
+
+        int dx1 = Integer.parseInt(x.get(1)) - Integer.parseInt(x.get(0));
+        int dx2 = Integer.parseInt(x.get(2)) - Integer.parseInt(x.get(1));
+        int dy1 = Integer.parseInt(x.get(1)) - Integer.parseInt(x.get(0));
+        int dy2 = Integer.parseInt(x.get(2)) - Integer.parseInt(x.get(1));
+
+        double r = dx1*dy2 - dx2*dy1;;
+
+        if ( r < 0 ) return false;
+        else return true;
     }
 
 }
