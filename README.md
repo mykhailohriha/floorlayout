@@ -4,3 +4,7 @@ draws accepted rooms using html5 canvas
 This project uses Java 8, Spring(Boot, MVC, JPA), MySQL, Hibernate, JavaScript, Thymeleaf, HTML. 
 
 Automatic database creation is done using Flyway.
+
+How to start the application:
+1. Create an empty 'layoutdb' database;
+2. Run it!.
