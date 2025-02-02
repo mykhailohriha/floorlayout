@@ -15,16 +15,14 @@
     <table class="table" >
         <thead class="thead-dark">
         <tr align="center">
-            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Coordinates</th>
-            <th scope="col">View</th>
+            <th scope="col">Views</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="l : ${layouts}">
-            <td th:text="${l.id}"></td>
             <td th:text="${l.name}"></td>
             <td th:text="${l.coordinates}"></td>
             <td align="center">

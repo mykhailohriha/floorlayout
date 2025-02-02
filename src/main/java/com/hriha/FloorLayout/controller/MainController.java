@@ -2,7 +2,6 @@ package com.hriha.FloorLayout.controller;
 
 import com.hriha.FloorLayout.domain.Coordinate;
 import com.hriha.FloorLayout.domain.Layout;
-import com.hriha.FloorLayout.repos.LayoutRepo;
 import com.hriha.FloorLayout.service.LayoutService;
 import com.hriha.FloorLayout.service.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -28,6 +28,7 @@ public class MainController {
     public String main(Model model) {
         Iterable<Layout> layouts = layoutService.findAll();
         model.addAttribute("layouts", layouts);
+
         return "main";
     }
 
@@ -36,19 +37,7 @@ public class MainController {
                             @RequestParam String coordinates,
                             Model model) {
 
-        if (!validator.isDataCorrect(coordinates)) {
-            model.addAttribute("error", "Data is not correct");
-            return "errors/error";
-        }
-
-        if (validator.isDiagonalPresent(coordinates)) {
-            model.addAttribute("error", "The walls are diagonal");
-            return "errors/error";
-        }
-
-        if (validator.isCoordinateGoingClockwise(coordinates)) {
-            model.addAttribute("error", "Coordinates do not going clockwise");
-        }
+        if (validate(coordinates, model)) return "errors/error";
 
         layoutService.saveLayout(name, coordinates.replaceAll(",", " "));
 
@@ -92,10 +81,46 @@ public class MainController {
     @PostMapping("/update")
     public String updateBook(@RequestParam Integer id,
                              @RequestParam String name,
-                             @RequestParam String coordinates){
+                             @RequestParam String coordinates,
+                             Model model) {
+
+        if (validate(coordinates, model)) return "errors/error";
+
         layoutService.deleteLayout(id);
-        layoutService.saveLayout(name, coordinates);
+        layoutService.saveLayout(name, coordinates.replaceAll(",", " "));
 
         return "redirect:/all";
+    }
+
+    @PostMapping("filter")
+    public String filter(@RequestParam String filter,
+                         Map<String, Object> model) {
+        Iterable<Layout> layouts = layoutService.filter(filter);
+        model.put("layouts", layouts);
+
+        return "main";
+    }
+
+    private boolean validate(@RequestParam String coordinates, Model model) {
+        if (!validator.isDataCorrect(coordinates)) {
+            model.addAttribute("error", "Data is not correct");
+            return true;
+        }
+
+        if (validator.isDiagonalPresent(coordinates)) {
+            model.addAttribute("error", "The walls are diagonal");
+            return true;
+        }
+
+        if (validator.isRepeatingCornerPresent(coordinates)) {
+             model.addAttribute("error", "The corners are repeated");
+             return true;
+        }
+
+//        if (!validator.isCoordinateGoingClockwise(coordinates)) {
+//            model.addAttribute("error", "Coordinates do not going clockwise");
+//            return true;
+//        }
+        return false;
     }
 }

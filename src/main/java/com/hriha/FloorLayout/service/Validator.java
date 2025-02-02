@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 @Service
 public class Validator {
@@ -45,8 +45,38 @@ public class Validator {
         return false;
     }
 
-    public boolean isCoordinateGoingClockwise(String data) {
+    public boolean isRepeatingCornerPresent(String data){
+        List<Coordinate> coordinates = layoutService.getXY(data.replaceAll(","," "));
+
+        for (int i = 0; i < coordinates.size(); i++) {
+            for (int j = i + 1; j < coordinates.size(); j++) {
+                if(coordinates.get(i).equals(coordinates.get(j))) return true;
+            }
+        }
         return false;
+    }
+
+
+    public boolean isCoordinateGoingClockwise(String data) {
+        String[] list = data.split(",");
+        ArrayList<String> x = new ArrayList<>();
+        ArrayList<String> y = new ArrayList<>();
+
+        for (int i = 0; i <list.length; i++) {
+            String[] pair = list[i].split(" ");
+            x.add(pair[0]);
+            y.add(pair[1]);
+        }
+
+        int dx1 = Integer.parseInt(x.get(1)) - Integer.parseInt(x.get(0));
+        int dx2 = Integer.parseInt(x.get(2)) - Integer.parseInt(x.get(1));
+        int dy1 = Integer.parseInt(x.get(1)) - Integer.parseInt(x.get(0));
+        int dy2 = Integer.parseInt(x.get(2)) - Integer.parseInt(x.get(1));
+
+        double r = dx1*dy2 - dx2*dy1;;
+
+        if ( r < 0 ) return false;
+        else return true;
     }
 
 }
