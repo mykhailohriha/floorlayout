@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 @Service
 public class Validator {
@@ -44,6 +44,18 @@ public class Validator {
 
         return false;
     }
+
+    public boolean isRepeatingCornerPresent(String data){
+        List<Coordinate> coordinates = layoutService.getXY(data.replaceAll(","," "));
+
+        for (int i = 0; i < coordinates.size(); i++) {
+            for (int j = i + 1; j < coordinates.size(); j++) {
+                if(coordinates.get(i).equals(coordinates.get(j))) return true;
+            }
+        }
+        return false;
+    }
+
 
     public boolean isCoordinateGoingClockwise(String data) {
         String[] list = data.split(",");
