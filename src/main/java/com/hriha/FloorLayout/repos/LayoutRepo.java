@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface LayoutRepo extends CrudRepository<Layout, Long> {
     Layout findLayoutById(Integer id);
+
+    void deleteById(Integer id);
+
+    List <Layout> findByName(String filter);
 }

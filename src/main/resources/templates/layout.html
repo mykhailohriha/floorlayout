@@ -3,12 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>View</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
 
-<p th:text="'Hello, ' + ${layout.name} + '!'"></p>
+<div th:insert="parts/navigation :: nav"></div>
+<div class="container mt-4">
+    <div align="center">
+        <h1><p th:text="${layout.name} + ':'"></p></h1>
 
+        <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;">
+        </canvas>
 
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
 
+            function draw(x, y) {
+                ctx.lineTo(x * 50, y * 50);
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = "red";
+                ctx.stroke();
+            }
+        </script>
+        <ul th:each="coordinate : ${coordinates}">
+            <script th:inline="javascript">
+                draw([[${coordinate.x}]], [[${coordinate.y}]]);
+            </script>
+        </ul>
+
+        <script>
+            draw([[${x}]], [[${y}]]);
+
+            for (var x = 0.5; x < 600; x += 10) {
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, 600);
+            }
+
+            for (var y = 0.5; y < 600; y += 10) {
+                ctx.moveTo(0, y);
+                ctx.lineTo(600, y);
+            }
+
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "#888";
+            ctx.stroke();
+        </script>
+    </div>
+</div>
 </body>
 </html>
