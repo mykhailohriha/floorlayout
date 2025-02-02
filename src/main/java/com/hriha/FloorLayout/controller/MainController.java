@@ -112,6 +112,11 @@ public class MainController {
             return true;
         }
 
+        if (validator.isRepeatingCornerPresent(coordinates)) {
+             model.addAttribute("error", "The corners are repeated");
+             return true;
+        }
+
 //        if (!validator.isCoordinateGoingClockwise(coordinates)) {
 //            model.addAttribute("error", "Coordinates do not going clockwise");
 //            return true;
