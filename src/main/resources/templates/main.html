@@ -15,19 +15,28 @@
         <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Coordinates</th>
+        <th scope="col">View</th>
+        <th scope="col">Action</th>
     </tr>
     <tbody>
     <tr th:each="l : ${layouts}">
         <td th:text="${l.id}"></td>
         <td th:text="${l.name}"></td>
         <td th:text="${l.coordinates}"></td>
+        <td>
+            <a th:href="@{'/show?id=' + ${l.id}}">
+                <span>Show</span>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{'/delete?id=' + ${l.id}}">
+                <span>Delete</span>
+            </a>
+        </td>
     </tr>
     </tbody>
     </thead>
 </table>
 
-<canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000;">
-
-</canvas>
 </body>
 </html>
